@@ -1,5 +1,5 @@
-CREATE TABLE usuarios (
-    nome VARCHAR(50),
-    email VARCHAR(100),
-    idade INT
+INSERT usuarios(nome, email, idade) VALUES (
+    "José",
+    "teste3@teste.com",
+    11
 );
