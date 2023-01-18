@@ -1,18 +1,24 @@
 const express = require("express");
 const app = express();
+const handlebars = require("express-handlebars");
 
 
-app.get("/", function(req, res){
-    res.sendFile(__dirname + "/html/index.html");
+//Config
+    //Template Engine
+    app.engine('handlebars', handlebars.engine({defaultLayout: "main"}));
+    app.set('view engine', 'handlebars');
+    //Configurando o parsing 
+    app.use(express.urlencoded({extended: false}));
+    app.use(express.json());
+//Rotas
+app.get("/cadastro", function(req, res){
+    res.render("formulario");
 });
 
-app.get("/sobre", function(req, res){
-    res.sendFile(__dirname + "/html/sobre.html");
+app.post("/add", function(req, res){
+    res.send("Título: " + req.body.titulo + " Conteúdo: " + req.body.conteudo);
 });
 
-app.get("/Ola/:nome/:cargo", function(req, res){
-    res.send("<h1> Olá " + req.params.nome + ", " + req.params.cargo + "</h1>");
-});
 
 app.listen(8081, function(){
     console.log("Servidor Rodando na url http://localhost:8081");
